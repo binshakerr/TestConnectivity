@@ -13,25 +13,4 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         observeConnectivity()
     }
-
 }
-
-
-extension UIViewController {
-    
-    func observeConnectivity() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleConnectivityChange), name: .connectionStatusChanged, object: nil)
-    }
-    
-    @objc
-    private func handleConnectivityChange(_ notification: Notification) {
-        guard let object = notification.object as? ConnectionObject else { return }
-        if object.status != .satisfied {
-            let alert = UIAlertController(title: "Error", message: "no internet connection", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .default)
-            alert.addAction(action)
-            present(alert, animated: true)
-        }
-    }
-}
-
